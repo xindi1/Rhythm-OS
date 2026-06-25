@@ -1,9 +1,3 @@
-# Rhythm OS v2
+# Rhythm OS v3
 
-Morning, Afternoon, Evening, Night.
-
-New in v2:
-- Editable occurred time
-- Recorded time preserved separately
-- Interval/pacing view
-- Up/down reorder controls within dayparts
+Mobile-first rebuild with compact home, daypart cards, quiet 24-hour timestamps, pacing intervals, editable occurred time, recorded time preserved, reorder controls, and centered Import JSON.
