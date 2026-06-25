@@ -1,20 +1,20 @@
 {
-  "name": "Rhythm OS v3.2",
+  "name": "Rhythm OS v3.3",
   "short_name": "Rhythm OS",
-  "id": "/rhythm-os-v32/",
-  "description": "Mobile-first daily rhythm tracker with compact occurred time control.",
-  "start_url": "./index.html?v=32",
+  "id": "/rhythm-os-v33/",
+  "description": "Mobile-first daily rhythm tracker with custom compact time picker.",
+  "start_url": "./index.html?v=33",
   "display": "standalone",
   "background_color": "#f7faff",
   "theme_color": "#f7faff",
   "icons": [
     {
-      "src": "icons/icon-192.png?v=32",
+      "src": "icons/icon-192.png?v=33",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "icons/icon-512.png?v=32",
+      "src": "icons/icon-512.png?v=33",
       "sizes": "512x512",
       "type": "image/png"
     }

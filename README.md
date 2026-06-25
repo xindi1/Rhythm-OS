@@ -1,3 +1,3 @@
-# Rhythm OS v3.2
+# Rhythm OS v3.3
 
-Fixes the Occurred time control by replacing the visible native time field with a compact pill that opens a hidden picker.
+Removes native time input entirely. Uses a compact occurred-time pill and custom hour/minute modal picker.
