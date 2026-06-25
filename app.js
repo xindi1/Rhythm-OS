@@ -1,4 +1,4 @@
-const KEY='rhythm_os_v3_entries',LEGACY='rhythm_os_v2_entries',THEME='rhythm_os_theme';const dayparts=['Morning','Afternoon','Evening','Night'];const icons={Morning:'☀',Afternoon:'◐',Evening:'◒',Night:'☾'};const quick=['Breakfast','Coffee','Walk','Workout','Meeting','Admin','Voice Router','Build','Lunch','Errand','Dinner','Family','Read','Sleep'];let entries=load(),activeDate=todayKey();
+const KEY='rhythm_os_v31_entries',LEGACY3='rhythm_os_v3_entries',LEGACY2='rhythm_os_v2_entries',THEME='rhythm_os_theme';const dayparts=['Morning','Afternoon','Evening','Night'];const icons={Morning:'☀',Afternoon:'◐',Evening:'◒',Night:'☾'};const quick=['Breakfast','Coffee','Walk','Workout','Meeting','Admin','Voice Router','Build','Lunch','Errand','Dinner','Family','Read','Sleep'];let entries=load(),activeDate=todayKey();
 function todayKey(d=new Date()){return`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`}
 function label(){return new Date(`${activeDate}T12:00:00`).toLocaleDateString([],{weekday:'short',month:'short',day:'numeric'})}
 function time(iso){return new Date(iso).toLocaleTimeString([],{hour:'2-digit',minute:'2-digit',hour12:false})}
@@ -8,7 +8,7 @@ function mins(iso){let d=new Date(iso);return d.getHours()*60+d.getMinutes()}
 function interval(a,b){let delta=mins(b)-mins(a);if(delta<0)delta+=1440;return`${delta} min`}
 function uid(){return crypto&&crypto.randomUUID?crypto.randomUUID():`id-${Date.now()}`}
 function esc(s=''){return String(s||'').replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]))}
-function load(){try{let c=JSON.parse(localStorage.getItem(KEY))||[];if(c.length)return c;let l=JSON.parse(localStorage.getItem(LEGACY))||[];if(l.length){localStorage.setItem(KEY,JSON.stringify(l));return l}return[]}catch{return[]}}
+function load(){try{let c=JSON.parse(localStorage.getItem(KEY))||[];if(c.length)return c;let l3=JSON.parse(localStorage.getItem(LEGACY3))||[];if(l3.length){localStorage.setItem(KEY,JSON.stringify(l3));return l3}let l2=JSON.parse(localStorage.getItem(LEGACY2))||[];if(l2.length){localStorage.setItem(KEY,JSON.stringify(l2));return l2}return[]}catch{return[]}}
 function save(){localStorage.setItem(KEY,JSON.stringify(entries))}
 function set(id,v){let e=document.getElementById(id);if(e)e.textContent=v}
 function current(){let h=new Date().getHours();return h<12?'Morning':h<17?'Afternoon':h<21?'Evening':'Night'}
@@ -26,6 +26,6 @@ function entryHtml(e,i,dp){let list=by(dp),gap=i>0?`<div class="gap-line"><span>
 function editEntry(id){let e=entries.find(x=>x.id===id);if(!e)return;view('add');entryForm.editId.value=e.id;entryForm.daypart.value=e.daypart;entryForm.entry.value=e.entry;entryForm.note.value=e.note||'';entryForm.occurredTime.value=hm(new Date(e.occurredAt||e.createdAt));nowBtn.classList.remove('selected')}
 function deleteEntry(id){if(confirm('Delete this entry?')){entries=entries.filter(e=>e.id!==id);renormalize();save();render()}}
 function moveEntry(id,dir){let e=entries.find(x=>x.id===id);if(!e)return;let list=by(e.daypart),idx=list.findIndex(x=>x.id===id),sw=list[idx+dir];if(!sw)return;let t=e.order||0;e.order=sw.order||0;sw.order=t;save();render()}
-function exportData(){let blob=new Blob([JSON.stringify({app:'Rhythm OS',version:'3.0',exportedAt:new Date().toISOString(),entries},null,2)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=`rhythm-os-v3-export-${todayKey()}.json`;a.click();URL.revokeObjectURL(a.href)}
+function exportData(){let blob=new Blob([JSON.stringify({app:'Rhythm OS',version:'3.1',exportedAt:new Date().toISOString(),entries},null,2)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=`rhythm-os-v31-export-${todayKey()}.json`;a.click();URL.revokeObjectURL(a.href)}
 function importData(ev){let f=ev.target.files[0];if(!f)return;let r=new FileReader();r.onload=()=>{try{let d=JSON.parse(r.result);if(Array.isArray(d.entries)){entries=[...d.entries,...entries];renormalize();save();render();alert('Import complete.')}else alert('Import file did not contain entries.')}catch{alert('Could not import JSON.')}};r.readAsText(f);ev.target.value=''}
 window.view=view;window.editEntry=editEntry;window.deleteEntry=deleteEntry;window.moveEntry=moveEntry;init();

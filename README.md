@@ -1,3 +1,9 @@
-# Rhythm OS v3
+# Rhythm OS v3.1
 
-Mobile-first rebuild with compact home, daypart cards, quiet 24-hour timestamps, pacing intervals, editable occurred time, recorded time preserved, reorder controls, and centered Import JSON.
+Polish rebuild:
+- Occurred row fixed with stacked Now + time controls
+- Import JSON centered
+- Header compressed
+- Spacing tightened
+- Quick Add chips reduced
+- 24-hour occurred time retained
