@@ -1,3 +1,3 @@
-# Rhythm OS v3.3
+# Rhythm OS v4
 
-Removes native time input entirely. Uses a compact occurred-time pill and custom hour/minute modal picker.
+Daily Timeline release with previous/next day navigation, Today button, jump-to-date, selected-day capture, and first/last move summary.
